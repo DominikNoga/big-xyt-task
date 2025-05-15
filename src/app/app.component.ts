@@ -14,8 +14,7 @@ import { MatCardModule } from '@angular/material/card';
 export class AppComponent implements OnInit {
   orderBookData = signal<OrderBookSnapshot[]>([]);
   chartDataService = inject(ChartDataService);
-  timestamps = signal<string[]>([]);
-  currentIndex = signal<number>(0);
+  currentTimestamp = this.chartDataService.currentTimestamp
   private destroyRef = inject(DestroyRef);
 
   ngOnInit(): void {
@@ -23,9 +22,6 @@ export class AppComponent implements OnInit {
       .subscribe({
         next: (orderBookData => {
           this.orderBookData.set(orderBookData);
-          this.timestamps.set(
-            orderBookData.map(orderBookItem => orderBookItem.time)
-          );
         }),
         error: (err) => {
           console.error(err);
@@ -37,9 +33,7 @@ export class AppComponent implements OnInit {
     });
   }
 
-  onTimestampChange(timestampIndex: number) {
-    console.log('on timestamp change')
-    this.currentIndex.set(timestampIndex);
+  replay() {
+    this.chartDataService.showAllTimestamps();
   }
-
 }

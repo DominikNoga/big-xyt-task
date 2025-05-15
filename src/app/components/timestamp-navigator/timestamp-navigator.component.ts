@@ -1,7 +1,8 @@
-import { Component, input, output, signal } from '@angular/core';
+import { Component, inject, input, output, signal } from '@angular/core';
 import { MatSliderModule } from '@angular/material/slider';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { ChartDataService } from '../../utils/chart-data-service/chart-data.service';
 
 @Component({
   selector: 'app-timestamp-navigator',
@@ -11,12 +12,12 @@ import { FormsModule } from '@angular/forms';
   styleUrl: './timestamp-navigator.component.scss'
 })
 export class TimestampNavigatorComponent {
-  readonly timestamps = input.required<string[]>();
-  onTimestampChange = output<number>();
+  chartDataService = inject(ChartDataService);
+  readonly timestamps = this.chartDataService.timestamps;
   selectedIndex!: number;
 
   onSliderChange() {
-    this.onTimestampChange.emit(this.selectedIndex);
+    this.chartDataService.setCurrentTimestamp(this.selectedIndex);
   }
 
 }

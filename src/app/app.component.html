@@ -2,16 +2,16 @@
   @if (orderBookData() && orderBookData().length) {
     <mat-card class="card">
       <mat-card-content>
-        <app-order-book [snapshot]="orderBookData()[currentIndex()]"></app-order-book>
+        <app-order-book [snapshot]="orderBookData()[currentTimestamp()]"></app-order-book>
       </mat-card-content>
     </mat-card>
     <mat-card class="card">
       <mat-card-content>
-        <app-timestamp-navigator 
-          [timestamps]="timestamps()"
-          (onTimestampChange)="onTimestampChange($event)">
+        <app-timestamp-navigator>
         </app-timestamp-navigator>
       </mat-card-content>
+      <br>
+      <button (click)="replay()">Replay</button>
     </mat-card>
   }
 </main>
