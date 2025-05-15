@@ -1,0 +1,12 @@
+#order-book-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 70vh;
+    width: 60vw;
+}
+
+canvas {
+    max-height: 60vh;
+}

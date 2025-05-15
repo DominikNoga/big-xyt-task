@@ -1,0 +1,16 @@
+@if (timestamps().length) {
+    <div class="slider-container">
+        <label>Selected: {{ timestamps()[selectedIndex] }}</label>
+        <mat-slider
+            class="slider"
+            [min]="0"
+            [max]="timestamps().length - 1"
+            [step]="1"
+            (input)="onSliderChange()"
+            thumbLabel
+            tickInterval="1"
+        >
+            <input matSliderThumb [(ngModel)]="selectedIndex">
+        </mat-slider>
+    </div>
+}
