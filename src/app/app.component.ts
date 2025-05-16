@@ -4,17 +4,20 @@ import { ChartDataService } from './utils/chart-data-service/chart-data.service'
 import { OrderBookComponent } from './components/order-book/order-book.component';
 import { TimestampNavigatorComponent } from './components/timestamp-navigator/timestamp-navigator.component';
 import { MatCardModule } from '@angular/material/card';
+import { MatButtonModule } from '@angular/material/button';
+import { LoaderComponent } from './components/loader/loader.component';
 
 @Component({
   selector: 'app-root',
-  imports: [OrderBookComponent, TimestampNavigatorComponent, MatCardModule],
+  imports: [OrderBookComponent, TimestampNavigatorComponent, MatCardModule, MatButtonModule, LoaderComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'
 })
 export class AppComponent implements OnInit {
   orderBookData = signal<OrderBookSnapshot[]>([]);
-  chartDataService = inject(ChartDataService);
-  currentTimestamp = this.chartDataService.currentTimestamp
+  private readonly chartDataService = inject(ChartDataService);
+  readonly currentTimestamp = this.chartDataService.currentTimestamp;
+  readonly replayInProgress = this.chartDataService.replayInProgress;
   private destroyRef = inject(DestroyRef);
 
   ngOnInit(): void {
@@ -35,5 +38,9 @@ export class AppComponent implements OnInit {
 
   replay() {
     this.chartDataService.showAllTimestamps();
+  }
+
+  cancelReplay() {
+    this.chartDataService.cancelReplay();
   }
 }

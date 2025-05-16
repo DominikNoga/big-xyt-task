@@ -13,7 +13,8 @@ export class ChartDataService {
   timestamps = this.timestamps$.asReadonly();
   private currentTimestamp$ = signal<number>(0);
   currentTimestamp = this.currentTimestamp$.asReadonly();
-  // 30 seconds
+  private replayInProgress$ = signal<boolean>(false);
+  replayInProgress = this.replayInProgress$.asReadonly();
   private readonly REPLAY_ANIMATION_LENGTH = 30_000;
 
   fetchOrderBookData(): Observable<OrderBookSnapshot[]> {
@@ -32,14 +33,19 @@ export class ChartDataService {
     const intervalValue = this.REPLAY_ANIMATION_LENGTH / this.timestamps().length;
     const endIndex = this.timestamps().length - 1; 
     let index = 0;
-
+    this.replayInProgress$.set(true);
     const interval = setInterval(() => {
       this.setCurrentTimestamp(index);
       index++;
-      if (index === endIndex) {
+      if (index === endIndex || !this.replayInProgress$()) {
         clearInterval(interval);
+        this.replayInProgress$.set(false);
       }
     }, intervalValue);
+  }
+
+  cancelReplay() {
+    this.replayInProgress$.set(false);
   }
 
   setCurrentTimestamp(index: number) {

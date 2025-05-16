@@ -1,4 +1,4 @@
-import { Component, inject, input, output, signal } from '@angular/core';
+import { Component, effect, inject } from '@angular/core';
 import { MatSliderModule } from '@angular/material/slider';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
@@ -14,7 +14,14 @@ import { ChartDataService } from '../../utils/chart-data-service/chart-data.serv
 export class TimestampNavigatorComponent {
   chartDataService = inject(ChartDataService);
   readonly timestamps = this.chartDataService.timestamps;
-  selectedIndex!: number;
+  readonly currentTimestamp = this.chartDataService.currentTimestamp;
+  selectedIndex: number = this.currentTimestamp();
+  
+  constructor() {
+    effect(() => {
+      this.selectedIndex = this.currentTimestamp();
+    })
+  }
 
   onSliderChange() {
     this.chartDataService.setCurrentTimestamp(this.selectedIndex);

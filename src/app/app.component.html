@@ -6,12 +6,27 @@
       </mat-card-content>
     </mat-card>
     <mat-card class="card">
-      <mat-card-content>
+      <mat-card-content class="card-content">
         <app-timestamp-navigator>
         </app-timestamp-navigator>
+        @if (replayInProgress()) {
+          <app-loader></app-loader>
+        }
       </mat-card-content>
-      <br>
-      <button (click)="replay()">Replay</button>
+      <mat-card-actions class="card-actions">
+        <button
+          mat-stroked-button
+          [disabled]="!replayInProgress()" 
+          (click)="cancelReplay()">
+          Cancel
+        </button>
+        <button
+          [disabled]="replayInProgress()"
+          mat-flat-button
+          (click)="replay()">
+          Replay
+        </button>
+      </mat-card-actions>      
     </mat-card>
   }
 </main>
