@@ -1,6 +1,6 @@
-@if (snapshot) {
+@if (snapshot()) {
     <section id="order-book-container">
-        <h3>Order Book Snapshot at {{ snapshot.time }}</h3>
+        <h3>Order Book Snapshot at {{ snapshot().time }}</h3>
         <canvas 
             baseChart 
             [data]="barChartData" 
