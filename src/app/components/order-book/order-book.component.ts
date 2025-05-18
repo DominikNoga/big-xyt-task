@@ -1,4 +1,5 @@
-import { Component, input, Input, OnChanges, SimpleChanges } from '@angular/core';
+import { ChartDataService } from './../../utils/chart-data-service/chart-data.service';
+import { Component, inject, input, Input, OnChanges, SimpleChanges } from '@angular/core';
 import { ChartConfiguration, ChartOptions } from 'chart.js';
 import { OrderBookSnapshot } from '../../models/models';
 import { CommonModule } from '@angular/common';
@@ -13,13 +14,14 @@ import { BaseChartDirective } from 'ng2-charts';
 })
 export class OrderBookComponent implements OnChanges {
   snapshot = input.required<OrderBookSnapshot>();
+  chartDataService = inject(ChartDataService);
 
-  public barChartData: ChartConfiguration<'bar'>['data'] = {
+  barChartData: ChartConfiguration<'bar'>['data'] = {
     labels: [],
     datasets: []
   };
 
-  public barChartOptions: ChartOptions<'bar'> = {
+  barChartOptions: ChartOptions<'bar'> = {
     responsive: true,
     indexAxis: 'y',
     plugins: {
@@ -44,6 +46,8 @@ export class OrderBookComponent implements OnChanges {
       this.prepareChartData();
     }
   }
+
+  getFormattedTime = () => this.chartDataService.formatTimestamp(this.snapshot().time);
 
   private prepareChartData(): void {
     const labels = this.snapshot()!.bids.map(bid => bid.price.toFixed(4)).reverse()

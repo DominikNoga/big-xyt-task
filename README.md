@@ -1,6 +1,17 @@
 # BigXytTask
 
 This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 19.2.11.
+It was created for purpose of the recruitment task.
+This is interactive data visualization tool that displays trading information gathered from json file. 
+The provided data is essentially an order book snapshot at different moments.
+
+## App preview
+You can test the app here: https://big-xyt-task.onrender.com
+
+## Features
+- View Snapshot: User is seeing the order book at given time
+- Time Navigation: User can naviagate through a different timestamps
+- Replay mode: User can see the 1 minute animation of all timestamps
 
 ## Development server
 
@@ -12,19 +23,6 @@ ng serve
 
 Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
 
-## Code scaffolding
-
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
-
-```bash
-ng generate component component-name
-```
-
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
-
-```bash
-ng generate --help
-```
 
 ## Building
 

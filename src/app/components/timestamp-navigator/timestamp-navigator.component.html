@@ -1,6 +1,6 @@
 @if (timestamps().length) {
     <div class="slider-container">
-        <label>Selected: {{ timestamps()[selectedIndex] }}</label>
+        <label>Selected: {{ getFormattedTime() }}</label>
         <mat-slider
             class="slider"
             [min]="0"

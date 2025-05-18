@@ -15,7 +15,7 @@ export class ChartDataService {
   currentTimestamp = this.currentTimestamp$.asReadonly();
   private replayInProgress$ = signal<boolean>(false);
   replayInProgress = this.replayInProgress$.asReadonly();
-  private readonly REPLAY_ANIMATION_LENGTH = 30_000;
+  private readonly REPLAY_ANIMATION_LENGTH = 60_000;
 
   fetchOrderBookData(): Observable<OrderBookSnapshot[]> {
     return this.http.get<OrderBookSnapshotItemJson[]>(this.DATA_URL)
@@ -51,6 +51,8 @@ export class ChartDataService {
   setCurrentTimestamp(index: number) {
     this.currentTimestamp$.set(index);
   }
+
+  formatTimestamp = (timestamp: string) => timestamp.slice(0, 11);
 
   private getTransformedJsonData(snapshot: OrderBookSnapshotItemJson): OrderBookSnapshot {
     const bids: PriceLevel[] = [];

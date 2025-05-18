@@ -23,6 +23,8 @@ export class TimestampNavigatorComponent {
     })
   }
 
+  getFormattedTime = () => this.chartDataService.formatTimestamp(this.timestamps()[this.selectedIndex]);
+
   onSliderChange() {
     this.chartDataService.setCurrentTimestamp(this.selectedIndex);
   }
