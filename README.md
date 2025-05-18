@@ -5,9 +5,6 @@ It was created for purpose of the recruitment task.
 This is interactive data visualization tool that displays trading information gathered from json file. 
 The provided data is essentially an order book snapshot at different moments.
 
-## App preview
-You can test the app here: https://big-xyt-task.onrender.com
-
 ## Features
 - View Snapshot: User is seeing the order book at given time
 - Time Navigation: User can naviagate through a different timestamps
