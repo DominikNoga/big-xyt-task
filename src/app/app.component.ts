@@ -13,34 +13,35 @@ import { LoaderComponent } from './components/loader/loader.component';
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'
 })
-export class AppComponent implements OnInit {
-  orderBookData = signal<OrderBookSnapshot[]>([]);
-  private readonly chartDataService = inject(ChartDataService);
-  readonly currentTimestamp = this.chartDataService.currentTimestamp;
-  readonly replayInProgress = this.chartDataService.replayInProgress;
-  private destroyRef = inject(DestroyRef);
+export class AppComponent { 
+  // implements OnInit {
+  // orderBookData = signal<OrderBookSnapshot[]>([]);
+  // private readonly chartDataService = inject(ChartDataService);
+  // readonly currentTimestamp = this.chartDataService.currentTimestamp;
+  // readonly replayInProgress = this.chartDataService.replayInProgress;
+  // private destroyRef = inject(DestroyRef);
 
-  ngOnInit(): void {
-    const sub = this.chartDataService.fetchOrderBookData()
-      .subscribe({
-        next: (orderBookData => {
-          this.orderBookData.set(orderBookData);
-        }),
-        error: (err) => {
-          console.error(err);
-        }
-      });
+  // ngOnInit(): void {
+  //   const sub = this.chartDataService.fetchOrderBookData()
+  //     .subscribe({
+  //       next: (orderBookData => {
+  //         this.orderBookData.set(orderBookData);
+  //       }),
+  //       error: (err) => {
+  //         console.error(err);
+  //       }
+  //     });
 
-    this.destroyRef.onDestroy(() => {
-      sub.unsubscribe();
-    });
-  }
+  //   this.destroyRef.onDestroy(() => {
+  //     sub.unsubscribe();
+  //   });
+  // }
 
-  replay() {
-    this.chartDataService.showAllTimestamps();
-  }
+  // replay() {
+  //   this.chartDataService.showAllTimestamps();
+  // }
 
-  cancelReplay() {
-    this.chartDataService.cancelReplay();
-  }
+  // cancelReplay() {
+  //   this.chartDataService.cancelReplay();
+  // }
 }
